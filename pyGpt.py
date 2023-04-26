@@ -4,7 +4,9 @@ import speech_recognition as sr
 from time import sleep
 import playsound
 import openai
-openai.api_key = "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"
+
+## Assigning API Key
+openai.api_key = "Your_API_Key"
 
 
 class pygpt:
@@ -12,7 +14,7 @@ class pygpt:
         return None
         
 
-
+    ## Connecting with ChatGPT
     def processing(self,query):
         if query:
             ans = openai.ChatCompletion.create(model='gpt-3.5-turbo',messages = [{'role':'system', 'content':'You are a helpful assistant'},
@@ -22,13 +24,16 @@ class pygpt:
         
         return None
     
+    ## Function for ability to speak
     def speak(self,text):
         tts = gtts.gTTS(text,lang='en-In',slow=False)
         filename = "voice.mp3"
         tts.save(filename)
         playsound.playsound(filename)
         os.remove(filename)
-
+    
+    
+    ## Function for ability to listen
     def get_audio(self):
         recognize = sr.Recognizer()
 
@@ -53,6 +58,8 @@ class pygpt:
         return 'None'
     
 
+    
+## Main Function
 if __name__=="__main__":
     pg = pygpt()
 
